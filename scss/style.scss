@@ -1,0 +1,670 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aleo&display=swap');
+
+$brightText: #fff;
+$darkText: #262626;
+$shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+$colorSearch-bg: #5474FD;
+$colorSelect: #FF6363;
+$colorEnjoy: #00a2ff;
+$headerThemeColor: #5474fd;
+$fontWebTitle: 'Josefin Sans', sans-serif;
+$fontMainTitle: 'Aleo', serif;
+$buttonMinWidth:160px;
+$buttonWidth:20vw;
+$buttonMaxWidth:225px;
+$buttonMinHeight:35px;
+$buttonHeight:7vh;
+$buttonMaxHeight:55px;
+
+
+@mixin BG($bg, $repeat, $position, $size) {
+    background: $bg;
+    background-repeat: $repeat;
+    background-position: $position;
+    background-size: $size;
+}
+
+@mixin dsFlex($a-items,$j-content,$f-dir) {
+    display: flex;
+    align-items: $a-items;
+    justify-content: $j-content;
+    flex-direction: $f-dir;
+}
+
+@mixin WH($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin WmaxW($width, $maxWidth) {
+    width: $width;
+    max-width: $maxWidth;
+}
+@mixin maxWH($maxWidth, $height) {
+    max-width: $maxWidth;
+    height: $height;
+}
+
+@mixin maxWmaxH($maxWidth, $maxHeight) {
+    max-width: $maxWidth;
+    max-height: $maxHeight;
+}
+
+@mixin minWminH($minWidth,$minHeight) {
+    min-width: $minWidth;
+    min-height: $minHeight;
+}
+
+@mixin allWH($minWidth, $minHeight, $width, $height, $maxWidth, $maxHeight) {
+    @include minWminH($minWidth,$minHeight);
+    @include WH($width, $height);
+    @include maxWmaxH($maxWidth, $maxHeight);
+}
+@mixin font($fw,$fs){
+    font-weight: $fw;
+    font-size: $fs;
+}
+
+@mixin fontAll($ff,$lh,$fw,$fs) {
+    font-family: $ff;
+    line-height: $lh;
+    @include font($fw,$fs);
+}
+
+@mixin fontNoFam($lh,$fw,$fs) {
+    line-height: $lh;
+    @include font($fw,$fs);
+}
+
+@mixin mediaFont($large,$semi-large,$medium,$small){
+    @media screen and (max-width: 1200px) {
+        font-size: $large;
+    }
+    @media screen and (max-width: 992px) {
+        font-size: $semi-large;
+    }
+    @media screen and (max-width: 768px) {
+        font-size: $medium;
+    }
+    @media screen and (max-width: 576px) {
+        font-size: $small;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all .2s ease-in;
+    scroll-behavior: smooth 
+}
+
+body{
+    @include fontAll($fontWebTitle,1.58, 300, 16px);
+	color:  $brightText;
+    padding: 15px;
+    letter-spacing: 1px;
+    @include mediaFont(16px,15px,14px,14px);
+
+    // @media screen and (max-width: 992px){
+    //     font: 15px/1.45 'Josefin Sans', sans-serif;
+    // }
+    // @media screen and (max-width: 768px){
+    //     font: 14px/1.3 'Josefin Sans', sans-serif;
+    // }
+    // @media screen and (max-width: 576px){
+    //     font: 13px/1.2 'Josefin Sans', sans-serif;
+    // }
+
+}
+
+// img {
+//     @include maxWH(100%,auto);
+//     width: 100%;
+// }
+
+
+
+h1, h2, h3 {
+    font-family:  $fontWebTitle;
+    font-weight: 600;
+}
+
+h1 {
+	font-size: 48px;
+    @include mediaFont(45px,42px,38px,35px);
+}
+h2 {
+	font-size: 36px;
+    @include mediaFont(34px,32px,29px,26px);
+}
+h3 {
+    font-size: 20px;
+    @include mediaFont(19px,18px,17px,16px);
+}
+
+.title {
+    @include fontNoFam(3,300,none);
+}
+
+.main-title {
+    @include fontAll($fontMainTitle,3,300,none);
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color: $brightText;
+    position: relative;
+    &:active {
+        color: $brightText;
+    }
+    &:visited {
+        color: $brightText;
+    }
+}
+.button,
+button{
+    @include allWH($buttonMinWidth,$buttonMinHeight,$buttonWidth, $buttonHeight,$buttonMaxWidth, $buttonMaxHeight);
+    border: none;
+    outline: none;
+    text-align: center;
+    background: linear-gradient(45deg ,#496bfe 37%, #5474fd 37%);
+    text-transform: uppercase;
+    color: #fff;
+    a {
+        @include dsFlex(center, center, none);
+        height: 100%;
+        &:hover {
+            color: $darkText;
+        }
+        &:active {
+            transform: scale(0.85);
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        color: $darkText;
+        box-shadow: $shadow;
+        transform: scale(1.1);
+        border-radius: 5px;
+        .icons {
+            transition: all .2s ease-in;
+            fill: $darkText;
+        }
+    }
+    
+}
+
+
+.container{
+    @include maxWH(1140px,100%);
+	padding: 0 15px;
+    margin: 0 auto;
+    // @media screen and (max-width: 1200px) {
+    //     width: 78%;
+    // }
+    // @media screen and (max-width: 992px) {
+    //     width: 90%;
+    // }
+    // @media screen and (max-width: 768px) {
+    //     width: 100%;
+    // }
+}
+
+.icons  {
+    display: block;
+    @include WH (100%,100%);
+    &_search {
+        fill: $brightText;
+        @include maxWmaxH (20px,22px);
+    }
+    &_down {
+        fill: $brightText;
+        @include maxWmaxH (15px,9px);
+    }
+    &_search-bg,
+    &_select,
+    &_enjoy {
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        @include maxWmaxH (60px,60px);
+    }
+    &_search-bg{
+        fill: $colorSearch-bg;
+    }
+    &_select{
+        fill: $colorSelect;
+    }
+    &_enjoy{
+        fill: $colorEnjoy;
+    }
+}
+
+.intro {
+    line-height: 1.1;
+    .website-title{
+        text-align: center;
+        letter-spacing: 2px;
+    }
+    span {
+        font-size: 22px;
+        @include mediaFont(20px,17px,14px,12px);
+        display: block;
+        text-align: center;
+        letter-spacing: 5.5px;
+    }
+}
+
+.header {
+    height: calc(100vh - 15px);
+}
+/* <<<<<<<=======================HOME=======================>>>>>>> */
+.home {
+    height: 90%;
+    @include BG(url(../img/bg_home.jpg), no-repeat, 50%, cover);
+    &__container{
+        @include dsFlex(center,none,column);
+        position: relative;
+        padding: 20vh 15px 10vh 15px;
+    }
+    .form{
+        @include dsFlex(none,space-between,none);
+        @include WmaxW(100%, 650px);
+        border: 2px solid $brightText;
+        margin-top: 50px;
+        &__searh-text {
+            width: 100%;
+            text-align: center;
+            border: none;
+            &:focus{
+                outline: none;
+                border:  5px inset $headerThemeColor;
+            }
+        }
+        &__button {
+            display: inline-block;
+            height: 60px;
+            @include dsFlex(center,space-between,none);
+            @include WmaxW(36%, 134px);
+            min-width: 0;
+            @include fontAll($fontMainTitle,none,300,16px);
+            background: $headerThemeColor;
+            padding: 0 12px 0 34px;
+            font-size: 13px;
+            @media screen and (max-width: 376px) {
+                padding: 0;
+                justify-content: center;
+                svg {
+                    display: none;
+                }
+            }
+            &:active span{
+                transform: scale(0.85);
+            }
+            &:active svg{
+                transform: scale(0.8);
+                margin-right: 10px;
+            }
+        }
+    }
+    &__scroll {
+        letter-spacing: 2px;
+        height: 100%;
+        @include dsFlex(center,none,none);
+    }
+    &__scroll a{
+        @include dsFlex(center,center,column);
+    }
+}
+
+/* <<<<<<<=======================HOME=======================>>>>>>> */
+/* <<<<<<<=======================NAVIGATION=======================>>>>>>> */
+.navigation{
+    height: 10%;
+    background: $headerThemeColor;
+    &__container{
+        @include dsFlex(center,space-between,none);
+        .title {
+            font-size: 24px;
+            letter-spacing: 2px;
+            @include mediaFont(22px,20px,18px,17px);
+        }
+    }
+}
+.nav__burger{
+    display: none;
+}
+.menu {
+    @include dsFlex(center,space-around,none);
+    @include fontAll($fontMainTitle,none,300,14px);
+    letter-spacing: 1px;
+    width: 530px;
+    text-transform: uppercase;
+    @media screen and (max-width: 1200px) {
+        font-size: 13px;
+        width: 470px;
+    }
+    @media screen and (max-width: 992px) {
+        font-size: 12px;
+    }
+    a:hover {
+        color: $darkText;
+    }
+}
+@media screen and (max-width: 768px) {
+    .navigation__container{
+        justify-content: center;
+        position: relative;
+    }
+    .menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+        width: 80%;
+        position: absolute;
+        right: 500%;
+        bottom: 9.75vh;
+        font-size: 14px;
+        
+        @media screen and (max-width: 576px){
+            grid-template-columns: 1fr;
+        }
+        &__item {
+            width: 100%;
+            padding: 10px 10px;  
+            // margin: 1px;
+            text-align: center;
+            // box-shadow: $shadow; 
+            // border-radius: 50%;
+            background: $headerThemeColor;   
+            transition: all 0.4s ease-in;
+            position: relative;
+            &:nth-child(1){
+                border-top-left-radius: 25px;
+                @media screen and (max-width: 576px){
+                    border-radius: 25px 25px 0 0;
+                }
+            }
+            &:nth-child(2){
+                border-top-right-radius: 25px;
+                @media screen and (max-width: 576px){
+                    border-top-right-radius: 0px;
+                }
+            }
+        }
+        &__link {
+            color: $brightText;
+            &:hover {
+                color:$darkText;
+            }
+        }
+    }
+
+    .nav__burger-img {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        @include WH(30px,2px);
+        background: $brightText;
+        margin-bottom: 5px;
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            transition: all .3s ease-in;
+            top: -7px;
+            @include WH(30px,2px);
+            background: $brightText;
+        }
+        &::after {
+            top: 7px;
+        }
+    }
+    .nav__burger:checked ~ .nav__burger-img {
+        transform: rotate(45deg);
+        transition: all .3s ease-in;
+    }
+    .nav__burger:checked ~ .nav__burger-img:before{
+        opacity: 0;
+    }
+    .nav__burger:checked ~ .nav__burger-img:after {
+        transform: translateY(-7px) rotate(-90deg);
+    }
+    .nav__burger:checked ~ .menu {
+        right: -30%;
+        transform: translateX(-50%);
+    }
+}
+/* <<<<<<<=======================NAVIGATION=======================>>>>>>> */
+/* <<<<<<<=======================WHY-US=======================>>>>>>> */
+.why-us {
+    @include BG(url(../img/bg-choose.png), no-repeat, 50%, cover);
+    background-size: cover; 
+    &__container {
+        @include dsFlex(center, none, none);
+        padding: 12vh 15px;
+    }
+    &__content {
+        flex-grow: 1;
+        max-width: 550px;
+        margin-right: 30px;
+        .content__text {
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+    }
+    &__gallery {
+        width: 50%;
+        .gallery__img_right {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .why-us{   
+        &__container {
+            flex-direction: column;
+            .gallery {
+                @include dsFlex(none, center, none);
+                width: fit-content;
+                flex-wrap: wrap;
+                &__img{
+                    @include dsFlex(none, center, none);
+                    margin: 10px;
+                }
+            }
+        }
+        &__content {
+            margin: 0 0 30px 0;
+            text-align: center;
+        }
+        
+    }
+}
+// @media screen and (max-width: 992px){
+//     .why-us__gallery {
+//         .img {
+//             width: 90%;
+//         }  
+//     }
+// }
+// @media screen and (max-width: 768px){
+//     .why-us__gallery {
+//         flex-direction: column;
+//         .gallery__img {
+//             margin: 10px 0;
+//             // .img {
+//             //     width: 100%;
+//             // }
+//         }
+        
+//     }
+// }
+/* <<<<<<<=======================WHY-US=======================>>>>>>> */
+/* <<<<<<<=======================BOOKING ALGORYTHM=======================>>>>>>> */
+.book-algor {
+    background: #333;
+    &__container{
+        padding: 12vh 15px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        position: relative;
+        .icons_arc {
+            position: absolute;
+            top: 26%;
+            width: 57%;
+            transform: translateY(-50%);
+            z-index: 0;
+            @include maxWmaxH(776.5px,97.5px);
+            @media screen and (max-width: 768px){
+                display: none;
+            }
+        }
+        .block {
+            position: relative;
+            @include dsFlex(center, center, column);
+            &__empty {
+                position: absolute;
+                top: 0;
+                background: #333;
+                width: 60px;
+                height: 60px;
+                z-index: 1;
+                
+            }
+            &__title {
+                padding-top: 60px;
+            }
+        }
+    }
+    &__dots {
+        position: absolute;
+        width: 100%;
+    }
+}
+/* <<<<<<<=======================BOOKING ALGORYTHM=======================>>>>>>> */
+/* <<<<<<<=======================COUNTRY=======================>>>>>>> */
+
+.country {
+    .container {
+        display: flex;
+        padding: 24vh 15px 12vh 15px;
+        .content {
+            background: #232323e1;
+            width: 540px;
+            padding: 40px 30px 50px 30px;
+            letter-spacing: 0px;
+            @media screen and (max-width: 375px) {
+                @include dsFlex(center, center, column);
+            }
+            &__name {
+                @include fontNoFam(2,300,none);
+            }
+            &__button {
+                margin-top: 40px;
+            }
+            &__text {
+                word-spacing: -1px;
+                letter-spacing: -0.5px;
+            }
+        }
+    }
+    &-first {
+        @include BG(url(../img/bg_house.jpg), no-repeat, 50%, cover);
+    }
+    &-second {
+        @include BG(url(../img/bg_rocks_water.jpg), no-repeat, 50%, cover);
+        &__container{
+            justify-content: flex-end;
+        }
+    }
+}
+
+/* <<<<<<<=======================COUNTRY=======================>>>>>>> */
+/* <<<<<<<=======================FEEDBACK=======================>>>>>>> */
+
+.feedback {
+    @include BG(url(../img/bg_man.jpg), no-repeat, 50%, cover);
+    &__container {
+        padding: 10vh 15px 18vh 15px;
+        @include dsFlex(center, center, column);
+        .main-title {
+            @media screen and (max-width: 376px){
+                text-align: center;
+            }
+            margin-bottom: 60px;
+        }
+    }
+    .grid {
+        @include dsFlex(center, center, none);
+        @media screen and (max-width: 992px){
+            flex-wrap: wrap;
+        }
+        background: #333;
+        &__img {
+            object-fit: contain;
+        }
+        &__content {
+            height: 100%;
+            padding: 30px 50px 30px 60px;
+            @media screen and (max-width: 376px){
+                padding: 30px 10px 30px 10px;
+            }
+            .title{
+                margin-bottom: 10px;
+            }
+            .text {
+                word-spacing: -1px;
+                letter-spacing: -0.5px;
+            }
+        }
+        
+    }
+}
+
+
+/* <<<<<<<=======================FEEDBACK=======================>>>>>>> */
+/* <<<<<<<=======================FOOTER=======================>>>>>>> */
+
+.footer {
+    background: #232323;
+    &__container {
+        padding: 10vh 15px 5vh 15px;
+        @include dsFlex(center, center, column);
+        .intro {
+            
+            &__title{
+                font-size: 24px;
+            }
+            span {
+                font-size: 16px;
+                letter-spacing: 1px;
+                line-height: 2.5;
+                margin-bottom: 15px;
+            }
+            .social {
+                @include dsFlex(center, space-between, none);
+                &__link:hover {
+                    color: $colorSearch-bg;
+                }
+            }
+        }
+    }
+}
+
+/* <<<<<<<=======================FOOTER=======================>>>>>>> */
+@media screen and (max-width: 576px){
+    img {
+        width: 100%;
+    }
+}
