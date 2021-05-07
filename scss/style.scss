@@ -159,6 +159,7 @@ button{
     height: 90%;
     @include BG(url(../img/bg_home.jpg), no-repeat, 50%, cover);
     &__container{
+        user-select: none;
         @include dsFlex(center,none,column);
         position: relative;
         padding: 20vh $defaultIndent 10vh $defaultIndent;
@@ -175,6 +176,9 @@ button{
             &:focus{
                 outline: none;
                 border:  5px inset $headerThemeColor;
+                &::placeholder {
+                    color: transparent;
+                }
             }
         }
         &__button {
@@ -256,6 +260,7 @@ button{
         color: $darkText;
     }
 }
+/* <<<<<<<=======================BURGER=======================>>>>>>> */
 @media screen and (max-width: 768px) {
     .navigation__container{
         justify-content: center;
@@ -330,6 +335,7 @@ button{
         transform: translateX(-50%);
     }
 }
+/* <<<<<<<=======================BURGER=======================>>>>>>> */
 /* <<<<<<<=======================NAVIGATION=======================>>>>>>> */
 /* <<<<<<<=======================WHY-US=======================>>>>>>> */
 .why-us {
@@ -526,6 +532,9 @@ button{
 /* <<<<<<<=======================FOOTER=======================>>>>>>> */
 
 @media screen and (max-width: 576px){
+    body {
+        padding: 0;
+    }
     img {
         width: 100%;
     }

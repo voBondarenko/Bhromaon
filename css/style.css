@@ -340,6 +340,10 @@ button:hover .icons {
 }
 
 .home__container {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -386,6 +390,22 @@ button:hover .icons {
 .home .form__searh-text:focus {
   outline: none;
   border: 5px inset #5474fd;
+}
+
+.home .form__searh-text:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.home .form__searh-text:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+.home .form__searh-text:focus::-ms-input-placeholder {
+  color: transparent;
+}
+
+.home .form__searh-text:focus::placeholder {
+  color: transparent;
 }
 
 .home .form__button {
@@ -579,6 +599,7 @@ button:hover .icons {
   color: #262626;
 }
 
+/* <<<<<<<=======================BURGER=======================>>>>>>> */
 @media screen and (max-width: 768px) {
   .navigation__container {
     -webkit-box-pack: center;
@@ -688,6 +709,7 @@ button:hover .icons {
   }
 }
 
+/* <<<<<<<=======================BURGER=======================>>>>>>> */
 /* <<<<<<<=======================NAVIGATION=======================>>>>>>> */
 /* <<<<<<<=======================WHY-US=======================>>>>>>> */
 .why-us {
@@ -1088,6 +1110,9 @@ button:hover .icons {
 
 /* <<<<<<<=======================FOOTER=======================>>>>>>> */
 @media screen and (max-width: 576px) {
+  body {
+    padding: 0;
+  }
   img {
     width: 100%;
   }
