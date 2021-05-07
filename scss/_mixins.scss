@@ -1,0 +1,81 @@
+@mixin BG($bg, $repeat, $position, $size) {
+    background: $bg;
+    background-repeat: $repeat;
+    background-position: $position;
+    background-size: $size;
+}
+
+@mixin dsFlex($a-items,$j-content,$f-dir) {
+    display: flex;
+    align-items: $a-items;
+    justify-content: $j-content;
+    flex-direction: $f-dir;
+}
+
+@mixin pos($pos,$top,$right,$bottom,$left){
+    position: $pos;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+@mixin WH($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin WmaxW($width, $maxWidth) {
+    width: $width;
+    max-width: $maxWidth;
+}
+@mixin maxWH($maxWidth, $height) {
+    max-width: $maxWidth;
+    height: $height;
+}
+
+@mixin maxWmaxH($maxWidth, $maxHeight) {
+    max-width: $maxWidth;
+    max-height: $maxHeight;
+}
+
+@mixin minWminH($minWidth,$minHeight) {
+    min-width: $minWidth;
+    min-height: $minHeight;
+}
+
+@mixin allWH($minWidth, $minHeight, $width, $height, $maxWidth, $maxHeight) {
+    @include minWminH($minWidth,$minHeight);
+    @include WH($width, $height);
+    @include maxWmaxH($maxWidth, $maxHeight);
+}
+@mixin font($fw,$fs){
+    font-weight: $fw;
+    font-size: $fs;
+}
+
+@mixin fontAll($ff,$lh,$fw,$fs) {
+    font-family: $ff;
+    line-height: $lh;
+    @include font($fw,$fs);
+}
+
+@mixin fontNoFam($lh,$fw,$fs) {
+    line-height: $lh;
+    @include font($fw,$fs);
+}
+
+@mixin mediaFont($large,$semi-large,$medium,$small){
+    @media screen and (max-width: 1200px) {
+        font-size: $large;
+    }
+    @media screen and (max-width: 992px) {
+        font-size: $semi-large;
+    }
+    @media screen and (max-width: 768px) {
+        font-size: $medium;
+    }
+    @media screen and (max-width: 576px) {
+        font-size: $small;
+    }
+}

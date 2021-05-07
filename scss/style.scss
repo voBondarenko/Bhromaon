@@ -1,130 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Aleo&display=swap');
+@import 'fonts';
+@import 'variables';
+@import 'mixins';
 
-$brightText: #fff;
-$darkText: #262626;
-$shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-$colorSearch-bg: #5474FD;
-$colorSelect: #FF6363;
-$colorEnjoy: #00a2ff;
-$headerThemeColor: #5474fd;
-$fontWebTitle: 'Josefin Sans', sans-serif;
-$fontMainTitle: 'Aleo', serif;
-$buttonMinWidth:160px;
-$buttonWidth:20vw;
-$buttonMaxWidth:225px;
-$buttonMinHeight:35px;
-$buttonHeight:7vh;
-$buttonMaxHeight:55px;
-
-
-@mixin BG($bg, $repeat, $position, $size) {
-    background: $bg;
-    background-repeat: $repeat;
-    background-position: $position;
-    background-size: $size;
+*,*::after, *::before, *:hover {
+    transition: all .25s ease-in;
 }
-
-@mixin dsFlex($a-items,$j-content,$f-dir) {
-    display: flex;
-    align-items: $a-items;
-    justify-content: $j-content;
-    flex-direction: $f-dir;
-}
-
-@mixin WH($width, $height) {
-    width: $width;
-    height: $height;
-}
-
-@mixin WmaxW($width, $maxWidth) {
-    width: $width;
-    max-width: $maxWidth;
-}
-@mixin maxWH($maxWidth, $height) {
-    max-width: $maxWidth;
-    height: $height;
-}
-
-@mixin maxWmaxH($maxWidth, $maxHeight) {
-    max-width: $maxWidth;
-    max-height: $maxHeight;
-}
-
-@mixin minWminH($minWidth,$minHeight) {
-    min-width: $minWidth;
-    min-height: $minHeight;
-}
-
-@mixin allWH($minWidth, $minHeight, $width, $height, $maxWidth, $maxHeight) {
-    @include minWminH($minWidth,$minHeight);
-    @include WH($width, $height);
-    @include maxWmaxH($maxWidth, $maxHeight);
-}
-@mixin font($fw,$fs){
-    font-weight: $fw;
-    font-size: $fs;
-}
-
-@mixin fontAll($ff,$lh,$fw,$fs) {
-    font-family: $ff;
-    line-height: $lh;
-    @include font($fw,$fs);
-}
-
-@mixin fontNoFam($lh,$fw,$fs) {
-    line-height: $lh;
-    @include font($fw,$fs);
-}
-
-@mixin mediaFont($large,$semi-large,$medium,$small){
-    @media screen and (max-width: 1200px) {
-        font-size: $large;
-    }
-    @media screen and (max-width: 992px) {
-        font-size: $semi-large;
-    }
-    @media screen and (max-width: 768px) {
-        font-size: $medium;
-    }
-    @media screen and (max-width: 576px) {
-        font-size: $small;
-    }
-}
-
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: all .2s ease-in;
     scroll-behavior: smooth 
 }
 
 body{
     @include fontAll($fontWebTitle,1.58, 300, 16px);
 	color:  $brightText;
-    padding: 15px;
+    padding: $defaultIndent;
     letter-spacing: 1px;
     @include mediaFont(16px,15px,14px,14px);
-
-    // @media screen and (max-width: 992px){
-    //     font: 15px/1.45 'Josefin Sans', sans-serif;
-    // }
-    // @media screen and (max-width: 768px){
-    //     font: 14px/1.3 'Josefin Sans', sans-serif;
-    // }
-    // @media screen and (max-width: 576px){
-    //     font: 13px/1.2 'Josefin Sans', sans-serif;
-    // }
-
 }
-
-// img {
-//     @include maxWH(100%,auto);
-//     width: 100%;
-// }
-
-
 
 h1, h2, h3 {
     font-family:  $fontWebTitle;
@@ -170,10 +64,11 @@ a{
 .button,
 button{
     @include allWH($buttonMinWidth,$buttonMinHeight,$buttonWidth, $buttonHeight,$buttonMaxWidth, $buttonMaxHeight);
+    font-family: $fontMainTitle;
     border: none;
     outline: none;
     text-align: center;
-    background: linear-gradient(45deg ,#496bfe 37%, #5474fd 37%);
+    background: $buttonBackground;
     text-transform: uppercase;
     color: #fff;
     a {
@@ -183,38 +78,25 @@ button{
             color: $darkText;
         }
         &:active {
-            transform: scale(0.85);
+            transform: $transformClick;
         }
     }
-
     &:hover {
         cursor: pointer;
         color: $darkText;
-        box-shadow: $shadow;
-        transform: scale(1.1);
+        border: 5px inset #5474fd;
         border-radius: 5px;
         .icons {
-            transition: all .2s ease-in;
             fill: $darkText;
         }
     }
     
 }
 
-
 .container{
-    @include maxWH(1140px,100%);
-	padding: 0 15px;
+    @include maxWH($containerWidth + $defaultIndent*2,100%);
+	padding: 0 $defaultIndent;
     margin: 0 auto;
-    // @media screen and (max-width: 1200px) {
-    //     width: 78%;
-    // }
-    // @media screen and (max-width: 992px) {
-    //     width: 90%;
-    // }
-    // @media screen and (max-width: 768px) {
-    //     width: 100%;
-    // }
 }
 
 .icons  {
@@ -228,11 +110,13 @@ button{
         fill: $brightText;
         @include maxWmaxH (15px,9px);
     }
+    &_arc {
+        @include maxWmaxH(776.5px,97.5px);
+    }
     &_search-bg,
     &_select,
     &_enjoy {
-        position: absolute;
-        top: 0;
+        @include pos(absolute,0,none,none,none);
         z-index: 1;
         @include maxWmaxH (60px,60px);
     }
@@ -244,6 +128,11 @@ button{
     }
     &_enjoy{
         fill: $colorEnjoy;
+    }
+    &_quotes{
+        @include maxWmaxH (40px,50px);
+        fill: $headerThemeColor;
+        float: left;
     }
 }
 
@@ -272,7 +161,7 @@ button{
     &__container{
         @include dsFlex(center,none,column);
         position: relative;
-        padding: 20vh 15px 10vh 15px;
+        padding: 20vh $defaultIndent 10vh $defaultIndent;
     }
     .form{
         @include dsFlex(none,space-between,none);
@@ -291,25 +180,23 @@ button{
         &__button {
             display: inline-block;
             height: 60px;
-            @include dsFlex(center,space-between,none);
-            @include WmaxW(36%, 134px);
+            @include dsFlex(center,space-evenly,none);
+            @include WmaxW(30%, 150px);
             min-width: 0;
-            @include fontAll($fontMainTitle,none,300,16px);
+            @include fontAll($fontMainTitle,none,300,13px);
             background: $headerThemeColor;
             padding: 0 12px 0 34px;
-            font-size: 13px;
-            @media screen and (max-width: 376px) {
+            @media screen and (max-width: 576px) {
                 padding: 0;
-                justify-content: center;
                 svg {
                     display: none;
                 }
             }
-            &:active span{
-                transform: scale(0.85);
+            &:active span,
+            &:active svg{
+                transform: $transformClick;
             }
             &:active svg{
-                transform: scale(0.8);
                 margin-right: 10px;
             }
         }
@@ -318,6 +205,16 @@ button{
         letter-spacing: 2px;
         height: 100%;
         @include dsFlex(center,none,none);
+        &:hover a {
+            color: $darkText;
+            transform: $transformHover;
+            .icons {
+                fill: $darkText;
+            }
+        }
+        &:active {
+            transform: $transformClick;
+        }
     }
     &__scroll a{
         @include dsFlex(center,center,column);
@@ -344,8 +241,9 @@ button{
 .menu {
     @include dsFlex(center,space-around,none);
     @include fontAll($fontMainTitle,none,300,14px);
+    font-size: 14px;
     letter-spacing: 1px;
-    width: 530px;
+    width: ($containerWidth/2) - $defaultIndent;
     text-transform: uppercase;
     @media screen and (max-width: 1200px) {
         font-size: 13px;
@@ -368,23 +266,16 @@ button{
         grid-template-columns: 1fr 1fr;
         gap: 5px;
         width: 80%;
-        position: absolute;
-        right: 500%;
-        bottom: 9.75vh;
+        @include pos(absolute,none,500%,9.75vh,none);
         font-size: 14px;
-        
         @media screen and (max-width: 576px){
             grid-template-columns: 1fr;
         }
         &__item {
             width: 100%;
             padding: 10px 10px;  
-            // margin: 1px;
             text-align: center;
-            // box-shadow: $shadow; 
-            // border-radius: 50%;
             background: $headerThemeColor;   
-            transition: all 0.4s ease-in;
             position: relative;
             &:nth-child(1){
                 border-top-left-radius: 25px;
@@ -417,9 +308,7 @@ button{
         &::before,
         &::after {
             content: '';
-            position: absolute;
-            transition: all .3s ease-in;
-            top: -7px;
+            @include pos(absolute,-7px,none,none,none);
             @include WH(30px,2px);
             background: $brightText;
         }
@@ -429,7 +318,6 @@ button{
     }
     .nav__burger:checked ~ .nav__burger-img {
         transform: rotate(45deg);
-        transition: all .3s ease-in;
     }
     .nav__burger:checked ~ .nav__burger-img:before{
         opacity: 0;
@@ -446,15 +334,14 @@ button{
 /* <<<<<<<=======================WHY-US=======================>>>>>>> */
 .why-us {
     @include BG(url(../img/bg-choose.png), no-repeat, 50%, cover);
-    background-size: cover; 
     &__container {
         @include dsFlex(center, none, none);
-        padding: 12vh 15px;
+        padding: 12vh $defaultIndent;
     }
     &__content {
         flex-grow: 1;
-        max-width: 550px;
-        margin-right: 30px;
+        max-width: ($containerWidth/2) - $defaultIndent;
+        margin-right: $defaultIndent*6;
         .content__text {
             line-height: 1.8;
             margin-bottom: 30px;
@@ -463,8 +350,7 @@ button{
     &__gallery {
         width: 50%;
         .gallery__img_right {
-            display: flex;
-            justify-content: flex-end;
+            @include dsFlex(center, flex-end, none);
         }
     }
 }
@@ -486,46 +372,27 @@ button{
         &__content {
             margin: 0 0 30px 0;
             text-align: center;
+            .button {
+                margin: 0 auto;
+            }
         }
         
     }
 }
-// @media screen and (max-width: 992px){
-//     .why-us__gallery {
-//         .img {
-//             width: 90%;
-//         }  
-//     }
-// }
-// @media screen and (max-width: 768px){
-//     .why-us__gallery {
-//         flex-direction: column;
-//         .gallery__img {
-//             margin: 10px 0;
-//             // .img {
-//             //     width: 100%;
-//             // }
-//         }
-        
-//     }
-// }
 /* <<<<<<<=======================WHY-US=======================>>>>>>> */
 /* <<<<<<<=======================BOOKING ALGORYTHM=======================>>>>>>> */
 .book-algor {
-    background: #333;
+    background: $BGContentColor;
     &__container{
-        padding: 12vh 15px;
-        display: flex;
-        justify-content: space-evenly;
+        padding: 12vh $defaultIndent;
+        @include dsFlex(none, space-evenly, none);
         flex-wrap: wrap;
         position: relative;
         .icons_arc {
-            position: absolute;
-            top: 26%;
+            @include pos(absolute,28%,none,none,none);
             width: 57%;
             transform: translateY(-50%);
             z-index: 0;
-            @include maxWmaxH(776.5px,97.5px);
             @media screen and (max-width: 768px){
                 display: none;
             }
@@ -534,13 +401,10 @@ button{
             position: relative;
             @include dsFlex(center, center, column);
             &__empty {
-                position: absolute;
-                top: 0;
-                background: #333;
-                width: 60px;
-                height: 60px;
+                @include pos(absolute,0,none,none,none);
+                background: $BGContentColor;
+                @include WH(60px, 60px);
                 z-index: 1;
-                
             }
             &__title {
                 padding-top: 60px;
@@ -558,10 +422,10 @@ button{
 .country {
     .container {
         display: flex;
-        padding: 24vh 15px 12vh 15px;
+        padding: 24vh $defaultIndent 12vh $defaultIndent;
         .content {
-            background: #232323e1;
-            width: 540px;
+            background: $alternateBGContentColor;
+            width: ($containerWidth/2) - $defaultIndent;
             padding: 40px 30px 50px 30px;
             letter-spacing: 0px;
             @media screen and (max-width: 375px) {
@@ -596,7 +460,7 @@ button{
 .feedback {
     @include BG(url(../img/bg_man.jpg), no-repeat, 50%, cover);
     &__container {
-        padding: 10vh 15px 18vh 15px;
+        padding: 10vh $defaultIndent 18vh $defaultIndent;
         @include dsFlex(center, center, column);
         .main-title {
             @media screen and (max-width: 376px){
@@ -610,7 +474,7 @@ button{
         @media screen and (max-width: 992px){
             flex-wrap: wrap;
         }
-        background: #333;
+        background: $BGContentColor;
         &__img {
             object-fit: contain;
         }
@@ -620,26 +484,23 @@ button{
             @media screen and (max-width: 376px){
                 padding: 30px 10px 30px 10px;
             }
-            .title{
-                margin-bottom: 10px;
-            }
             .text {
                 word-spacing: -1px;
                 letter-spacing: -0.5px;
+                margin-top: 40px;
             }
         }
         
     }
 }
 
-
 /* <<<<<<<=======================FEEDBACK=======================>>>>>>> */
 /* <<<<<<<=======================FOOTER=======================>>>>>>> */
 
 .footer {
-    background: #232323;
+    background: $footerBG;
     &__container {
-        padding: 10vh 15px 5vh 15px;
+        padding: 10vh $defaultIndent 5vh $defaultIndent;
         @include dsFlex(center, center, column);
         .intro {
             
